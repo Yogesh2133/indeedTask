@@ -17,27 +17,27 @@ public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
 
-    // Get all students
+   
     @GetMapping("/getAllStudents")
     public List<Student> getAllStudents(){
         return studentRepository.findAll();
     }
 
-    // Get student by ID
+   
     @GetMapping("/getStudentById/{id}")
     public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
         Optional<Student> student = studentRepository.findById(id);
         return student.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Create a new student
+    
     @PostMapping("/createStudent")
     public ResponseEntity<Student> createStudent(@RequestBody Student student){
         Student savedStudent = studentRepository.save(student);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedStudent);
     }
 
-    // Update an existing student
+   
     @PutMapping("/updateStudent/{id}")
     public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student studentDetails) {
         Optional<Student> optionalStudent = studentRepository.findById(id);
@@ -54,7 +54,7 @@ public class StudentController {
         }
     }
 
-    // Delete a student
+    
     @DeleteMapping("/deleteStudent/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id){
         Optional<Student> optionalStudent = studentRepository.findById(id);
